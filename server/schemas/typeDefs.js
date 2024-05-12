@@ -22,7 +22,7 @@ const typeDefs = `
     }
 
     type Query {
-        me: [User]
+        me: User
         book: [Book]
         getSingleUser: User
     }
