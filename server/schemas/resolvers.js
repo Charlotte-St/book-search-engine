@@ -27,13 +27,17 @@ const resolvers = {
     },
     Mutation: {
         saveBook: async (parent, { input } , context) => {
-            const updatedUser = await User.findOneAndUpdate(
-                { _id: context._id },
-                { $addToSet: { savedBooks: input}},
-                { new: true}
-            );
-
-            return updatedUser
+            console.log('Starting saveBook')
+            console.log(context.user)
+            if (context.user){
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $addToSet: { savedBooks: input}},
+                    { new: true}
+                );
+                return updatedUser
+                console.log('Success')
+            }
         },
         createUser: async (parent, { username, email, password}) => {
             const user = await User.create({ username, email, password});

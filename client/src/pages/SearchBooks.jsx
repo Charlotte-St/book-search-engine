@@ -19,7 +19,7 @@ const SearchBooks = () => {
   const [searchedBooks, setSearchedBooks] = useState([]);
   const [searchInput, setSearchInput] = useState('');
   const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
-  const [saveBook, { error }] = useMutation(SAVE_BOOK);
+  const [saveBook, { data, error }] = useMutation(SAVE_BOOK);
 
   useEffect(() => {
     return () => saveBookIds(savedBookIds);
@@ -73,17 +73,15 @@ const SearchBooks = () => {
     }
 
     try {
-      const response = await saveBook({
+      const {data} = await saveBook({
         variables: {input: bookToSave}
       });
 
-      if (!response){
+      if (!data){
         throw new Error('Cannot save book')
       }
 
       setSavedBookIds([...savedBookIds, bookToSave.bookId]);
-
-      console.log('Success')
     } catch (err) {
       console.error(err);
     }
