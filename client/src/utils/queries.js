@@ -37,3 +37,9 @@ export const LOGIN_USER = gql`
     }
 `;
 
+export const SAVE_BOOK = gql`
+    query saveBook {
+        username
+        bookId
+    }
+`
