@@ -16,30 +16,3 @@ export const QUERY_BOOK = gql`
         }
     }
 `;
-
-export const REMOVE_BOOK = gql`
-    query user { 
-        userId
-        savedBooks
-    }
-`;
-
-export const ADD_USER = gql`
-    query user {
-        username
-        email
-    }
-`;
-export const LOGIN_USER = gql`
-    query user {
-        username
-        password
-    }
-`;
-
-export const SAVE_BOOK = gql`
-    query saveBook {
-        username
-        bookId
-    }
-`
