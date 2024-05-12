@@ -1,11 +1,27 @@
+//const { deleteBook } = require('../controllers/user-controller');
 const { Book, User } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
     Query: {
-        book: async ()=> {
-            return Book.find({})
-        }
+        me: async (parent, args, context) => {
+            if (context.user){
+               return User.findOne({ _id: context.user._id});
+            }
+            throw AuthenticationError
+        },
+
+       getSingleUser: async (parent, { user = null, params }) => {
+            const foundUser = await User.findOne({
+              $or: [{ _id: user ? user._id : params.id }, { username: params.username }],
+            });
+        
+            if (!foundUser) {
+              return res.status(400).json({ message: 'Cannot find a user with this id!' });
+            }
+        
+            res.json(foundUser);
+          },
     },
     Mutation: {
         saveBook: async (parent, { bookId, user}) => {
@@ -38,7 +54,7 @@ const resolvers = {
 
             return { token, user}
         },
-        removeBook: async (parent, { userId, bookId}) => {
+        deleteBook: async (parent, { userId, bookId}) => {
             return User.findOneAndUpdate(
                 { _id: userId}, 
                 { $pull: { savedBooks: { _id: bookId}}}, 
