@@ -9,7 +9,7 @@ const typeDefs = `
     }
 
     type User {
-        _id: ID!
+        _id: ID
         username: String!
         email: String!
         bookCount: Int
@@ -33,7 +33,7 @@ const typeDefs = `
         title: String!
         description: String!
         image: String
-        link: String!
+        link: String
     }
 
     type Mutation {

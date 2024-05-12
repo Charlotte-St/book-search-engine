@@ -79,13 +79,13 @@ const SearchBooks = () => {
 
       if (!response){
         throw new Error('Cannot save book')
-      };
+      }
 
       setSavedBookIds([...savedBookIds, bookToSave.bookId]);
-    } catch (err) {
-      console.error(error);
 
-      console.log(bookToSave)
+      console.log('Success')
+    } catch (err) {
+      console.error(err);
     }
   };
 
