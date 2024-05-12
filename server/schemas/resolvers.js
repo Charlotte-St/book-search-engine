@@ -29,9 +29,9 @@ const resolvers = {
         saveBook: async (parent, { bookData}, context) => {
             const book = await User.findOneAndUpdate(
                 { _id: context.user._id },
-                { $addToSet: { savedBooks: user.bookId}},
+                { $addToSet: { savedBooks: { bookId }}},
                 { new: true}
-            ).populate('books');
+            );
 
             return book
         },
