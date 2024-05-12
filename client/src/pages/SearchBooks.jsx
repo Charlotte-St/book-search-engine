@@ -9,7 +9,7 @@ import {
 } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
-//import { searchGoogleBooks } from '../utils/API';
+
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 import { useMutation } from '@apollo/client';
 import { SAVE_BOOK } from '../utils/mutations';
@@ -26,8 +26,6 @@ const SearchBooks = () => {
 
   const [saveBook, { error }] = useMutation(SAVE_BOOK);
 
-  // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
-  // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
   useEffect(() => {
     return () => saveBookIds(savedBookIds);
   });
@@ -41,8 +39,6 @@ const SearchBooks = () => {
     }
 
     try {
-      //const response = await searchGoogleBooks(searchInput);
-
       const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchInput}`)
 
       if (!response.ok) {
