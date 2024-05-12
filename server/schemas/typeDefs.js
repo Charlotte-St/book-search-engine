@@ -27,7 +27,7 @@ const typeDefs = `
         getSingleUser: User
     }
 
-    input newBook {
+    input bookInput {
         bookId: ID!
     }
 
@@ -35,7 +35,7 @@ const typeDefs = `
         createUser(username: String!, password: String!, email: String!): Auth
         deleteBook ( bookId: String!): User
         login(email: String!, password: String!): Auth
-        saveBook(newBook: newBook!): User
+        saveBook(bookData: bookInput!): User
   }
 `
 

@@ -16,14 +16,9 @@ import { SAVE_BOOK } from '../utils/mutations';
 
 
 const SearchBooks = () => {
-  // create state for holding returned google api data
   const [searchedBooks, setSearchedBooks] = useState([]);
-  // create state for holding our search field data
   const [searchInput, setSearchInput] = useState('');
-
-  // create state to hold saved bookId values
   const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
-
   const [saveBook, { error }] = useMutation(SAVE_BOOK);
 
   useEffect(() => {
@@ -76,12 +71,13 @@ const SearchBooks = () => {
 
     try {
       const { data } = await saveBook({
-        variables: { newBook: { ...bookToSave}}
+        variables: { bookData: { ...bookToSave }}
       });
-
       setSavedBookIds([...savedBookIds, bookToSave.bookId]);
     } catch (err) {
       console.error(error);
+
+      console.log(bookToSave)
     }
   };
 

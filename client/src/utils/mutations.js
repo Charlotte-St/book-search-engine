@@ -50,12 +50,13 @@ export const LOGIN_USER = gql`
 
 export const SAVE_BOOK = gql`
     mutation saveBook(
-        $newBook: InputBook!){
-        saveBook(userId: $newBook
+        $bookData: bookInput!){
+        saveBook(bookData: $bookData
         ){
             _id
             username
             email
+            bookCount
             savedBooks {
                 bookId
                 authors
