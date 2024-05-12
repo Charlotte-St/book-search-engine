@@ -7,9 +7,12 @@ import {
   Col
 } from 'react-bootstrap';
 
-import { getMe, deleteBook } from '../utils/API';
+//import { getMe, deleteBook } from '../utils/API';
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
+import { useMutation, useQuery } from '@apollo/client';
+import { DELETE_BOOK } from '../utils/mutations';
+import { GET_ME } from '../utils/queries';
 
 const SavedBooks = () => {
   const [userData, setUserData] = useState({});
@@ -26,7 +29,9 @@ const SavedBooks = () => {
           return false;
         }
 
-        const response = await getMe(token);
+        //const response = await getMe(token);
+
+        const response = await useQuery(GET_ME);
 
         if (!response.ok) {
           throw new Error('something went wrong!');
