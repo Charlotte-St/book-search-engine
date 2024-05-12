@@ -26,10 +26,10 @@ const resolvers = {
           },
     },
     Mutation: {
-        saveBook: async (parent, { bookData}, context) => {
+        saveBook: async (parent, { bookData }, context) => {
             const book = await User.findOneAndUpdate(
                 { _id: context.user._id },
-                { $addToSet: { savedBooks: { bookId }}},
+                { $addToSet: { savedBooks: bookData.bookId }},
                 { new: true}
             );
 

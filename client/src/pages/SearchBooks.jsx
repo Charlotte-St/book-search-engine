@@ -62,6 +62,9 @@ const SearchBooks = () => {
     // find the book in `searchedBooks` state by the matching id
     const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
 
+    const bookToSaveId = bookToSave.bookId;
+
+    console.log(bookToSaveId)
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -71,7 +74,7 @@ const SearchBooks = () => {
 
     try {
       const { data } = await saveBook({
-        variables: { bookData: { ...bookToSave }}
+        variables: {input: { ...bookToSave}}
       });
       setSavedBookIds([...savedBookIds, bookToSave.bookId]);
     } catch (err) {
