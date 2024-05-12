@@ -40,7 +40,7 @@ const typeDefs = `
         createUser(username: String!, password: String!, email: String!): Auth
         deleteBook ( bookId: String!): User
         login(email: String!, password: String!): Auth
-        saveBook(bookData: BookInput!): User
+        saveBook(input: BookInput): User
   }
 `
 

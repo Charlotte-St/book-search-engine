@@ -26,14 +26,14 @@ const resolvers = {
           },
     },
     Mutation: {
-        saveBook: async (parent, { bookData }, context) => {
-            const book = await User.findOneAndUpdate(
+        saveBook: async (parent, { input } , context) => {
+            const updatedUser = await User.findOneAndUpdate(
                 { _id: context.user._id },
-                { $addToSet: { savedBooks: bookData.bookId }},
+                { $addToSet: { savedBooks: input}},
                 { new: true}
             );
 
-            return book
+            return updatedUser
         },
         createUser: async (parent, { username, email, password}) => {
             const user = await User.create({ username, email, password});
