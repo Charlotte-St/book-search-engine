@@ -13,6 +13,7 @@ import { removeBookId } from '../utils/localStorage';
 import { useMutation, useQuery } from '@apollo/client';
 import { DELETE_BOOK } from '../utils/mutations';
 import { GET_ME } from '../utils/queries';
+//import { deleteOne } from '../../../server/models/User';
 
 const SavedBooks = () => {
   const [userData, setUserData] = useState({});
@@ -56,10 +57,16 @@ const SavedBooks = () => {
     }
 
     try {
-      const response = await deleteBook(bookId, token);
+      //const response = await deleteBook(bookId, token);
+
+      const [deleteBook, { error }] = useMutation(DELETE_BOOK);
+
+      const response = await deleteBook({
+        variables: { username, bookId}
+      })
 
       if (!response.ok) {
-        throw new Error('something went wrong!');
+        throw new Error(error);
       }
 
       const updatedUser = await response.json();
