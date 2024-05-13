@@ -28,10 +28,9 @@ const resolvers = {
     Mutation: {
         saveBook: async (parent, { input } , context) => {
             console.log('Starting saveBook')
-            console.log(context.user)
             if (context.user){
                 const updatedUser = await User.findOneAndUpdate(
-                    { _id: context.user._id },
+                    { _id: userId},
                     { $addToSet: { savedBooks: input}},
                     { new: true}
                 );
