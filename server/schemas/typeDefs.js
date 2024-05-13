@@ -23,6 +23,7 @@ const typeDefs = `
 
     type Query {
         me: User
+        user(userId: ID!): User
         book: [Book]
         getSingleUser: User
     }
