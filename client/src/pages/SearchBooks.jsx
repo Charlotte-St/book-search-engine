@@ -73,11 +73,11 @@ const SearchBooks = () => {
     }
 
     try {
-      const {data} = await saveBook({
+      const response = await saveBook({
         variables: {input: bookToSave}
       });
 
-      if (!data){
+      if (!response){
         throw new Error('Cannot save book')
       }
 

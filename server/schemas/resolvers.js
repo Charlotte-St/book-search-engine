@@ -30,7 +30,7 @@ const resolvers = {
             console.log('Starting saveBook')
             if (context.user){
                 const updatedUser = await User.findOneAndUpdate(
-                    { _id: userId},
+                    { _id: context.user._id },
                     { $addToSet: { savedBooks: input}},
                     { new: true}
                 );
