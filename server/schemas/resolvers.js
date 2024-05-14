@@ -57,7 +57,6 @@ const resolvers = {
             }
 
             const token = signToken(user);
-
             return { token, user}
         },
         deleteBook: async (parent, { userId, bookId}) => {
