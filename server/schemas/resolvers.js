@@ -59,12 +59,15 @@ const resolvers = {
             const token = signToken(user);
             return { token, user}
         },
-        deleteBook: async (parent, { userId, bookId}) => {
-            return User.findOneAndUpdate(
-                { _id: userId}, 
-                { $pull: { savedBooks: { _id: bookId}}}, 
-                { new: true}
-            )
+        deleteBook: async (parent, { bookId }, context) => {
+            if (context.user){
+                const updatedUser = User.findByIdAndUpdate(
+                  { _id: context.user._id},
+                  { $pull: { savedBooks: { bookId }}},
+                  { new: true }
+                );
+                return updatedUser
+              }
         }
     }
 };
