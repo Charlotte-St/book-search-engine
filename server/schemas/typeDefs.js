@@ -44,6 +44,6 @@ const typeDefs = `
         login(email: String!, password: String!): Auth
         saveBook(input: BookInput): User
   }
-`
+`;
 
 module.exports = typeDefs;
